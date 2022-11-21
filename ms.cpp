@@ -3,20 +3,19 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int linhaLivre[128][5];
-int linha[5];
-
-// int bitExtracted(int number, int k, int p){
-//     return (((1 << k) - 1) & (number >> p));
-// }
+int linhaLivre[256][5];
 
 void print_omega(){
-    for(int i=0; i<128; i++){
+    for(int i=0; i<256; i++){
         for(int j=0; j<5; j++){
             cout << linhaLivre[i][j] << " ";
         } cout << "\n";
     }
 }
+
+// int slide_window(int n, int winSize, int p){
+//     return (((1 << winSize) - 1) & (n >> p));
+// }
 
 bool omega(int entrada, int saida){
     
@@ -29,21 +28,21 @@ bool omega(int entrada, int saida){
         bitset<18> bitw(caminho);
         bitset<2> bit_ex(extra);
 
-        cout << "entrada: " << entrada << "\t( " << bit_in << " )\n";
-        cout << "extra: " << extra << "\t( " << bit_ex << " )\n";
-        cout << "saida: " << saida << "\t( " << bit_out << " )\n";
-        cout << "caminho: " << caminho << "\t( " << bitw << " )\n\n";
-
         bool encontrou=true;
 
         for(int j=0; j<5; j++){
             
             int i = 255 & (caminho >> (2*(4-j)));
-            // bitset<8> biti(i);
-            // cout << "linha: " << i << "\t( " << biti << " )\n";
+            bitset<8> biti(i);
+    
+            if(i>256){
+                cout << "entrada: " << entrada << "\t( " << bit_in << " )\n";
+                cout << "extra: " << extra << "\t( " << bit_ex << " )\n";
+                cout << "saida: " << saida << "\t( " << bit_out << " )\n";
+                cout << "caminho: " << caminho << "\t( " << bitw << " )\n";
+                cout << "linha: " << i << "\t( " << biti << " )\n\n";
 
-            if(i>128){
-                cout << printf("Erro, linha %d > 128.\n", i);
+                cout << printf("Erro, linha %d > 256.\n", i);
                 exit(0);
             } 
 
@@ -55,8 +54,6 @@ bool omega(int entrada, int saida){
             }
         }
 
-        cout << "\n";
-
         if(encontrou)
             return true;
     }
@@ -64,16 +61,13 @@ bool omega(int entrada, int saida){
     return false;
 }
 
-
 int main(){
 
-    int entrada = 0b00000001;
-    int saida = 0b00000111;
-    
-    int attempts=1000;
+    int attempts=500;
     for(int i=0; i<attempts; i++){
         bool ans=omega(i*2, 1+(i*2));
-        cout << (ans? "encontrou!":"nao encontrou...") << "\n";
+        cout << "(" << i*2 << "," << 1+(i*2) << ") "
+             << (ans?"encontrou!":"nao encontrou...") << "\n";
     }
 
     return 0;
