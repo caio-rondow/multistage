@@ -34,21 +34,27 @@ bool omega(int entrada, int saida){
     return false;
 }
 
-int main(){
+int main(int argc, char **argv){
 
-    int attempts=128;
-    int ct=0;
+    int attempts, ct=0;
+
+    cin>>attempts;
     for(int i=0; i<attempts; i++){
-        bool ans=omega(i*2, 1+(i*2));
+
+        int u, v;
+        cin>>u>>v;
+        bool ans=omega(u,v);
         ct+=(ans?1:0);
-        // cout << "(" << i*2 << "," << 1+(i*2) << ") "
+        // cout << "(" << u << "," << v << ") "
         //      << (ans?"encontrou!":"nao encontrou...") << "\n";
     }
 
-    double res=(ct*100.0)/attempts;
-    cout << "encontrou: " << res << "%\n";
-    cout << "nao encontrou: " << 100.0-res << "%\n";
-    
+    //print_omega(wire);
 
+    double res=(ct*100.0)/attempts;
+    cout << res << "\n";
+    //cout << "encontrou: " << res << "%\n";
+    //cout << "nao encontrou: " << 100.0-res << "%\n";
+    
     return 0;
 }
