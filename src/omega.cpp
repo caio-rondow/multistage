@@ -1,4 +1,4 @@
-#include "auxf.h"
+#include "../include/auxf.h"
 
 int wire[256][5];
 
@@ -40,21 +40,13 @@ int main(int argc, char **argv){
 
     cin>>attempts;
     for(int i=0; i<attempts; i++){
-
         int u, v;
         cin>>u>>v;
-        bool ans=omega(u,v);
-        ct+=(ans?1:0);
-        // cout << "(" << u << "," << v << ") "
-        //      << (ans?"encontrou!":"nao encontrou...") << "\n";
+        ct+=(omega(u,v)?1:0);
     }
 
-    //print_omega(wire);
+    // print_omega(wire);
+    cout << (ct*100.0)/attempts;
 
-    double res=(ct*100.0)/attempts;
-    cout << res << "\n";
-    //cout << "encontrou: " << res << "%\n";
-    //cout << "nao encontrou: " << 100.0-res << "%\n";
-    
     return 0;
 }

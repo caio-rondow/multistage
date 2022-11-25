@@ -14,6 +14,14 @@ int slide_window(int n, int winSize, int p){
     return (((1 << winSize) - 1) & (n >> p));
 }
 
+void print_omega(int wire[256][5]){
+    for(int i=0; i<256; i++){
+        for(int j=0; j<5; j++){
+            cout << wire[i][j] << " ";
+        } cout << "\n";
+    } cout << "\n";
+}
+
 void assert_values(int entrada, int extra, int saida, int caminho, int i){
 
     bitset<8> bit_in(entrada);
