@@ -12,14 +12,16 @@ declare -i ex=1         # número de estágios extras na rede
 declare -i radix=4      # quantos fios por switchs
 declare -i mask=255     # Se N=256, Log2(N)=8 e mask = 1111 1111 
 
+# Gerando entrada
 > "./misc/benchmark/txt/Fir16.txt"
-
 filename="./misc/benchmark/txt/Fir16.txt"
 command python3 ./src/dot2txt.py $in_net $name $rounds
-command g++ ./src/omega.cpp 
 
+# Roteando na rede
+command g++ ./src/omega.cpp 
 res=$(command ./a.out $rounds $N $st $ex $radix $mask  < $filename)
 
+# Saida...
 echo -n "Roteou $res% - $in_net grafo(s) "
 
 if (($name == 0)); then 
