@@ -41,3 +41,45 @@ void assert_values(int entrada, int extra, int saida, int caminho, int i){
         exit(0);
     } 
 }
+
+
+/*
+omega:
+    // bitset<8> bite(entrada);
+    // bitset<8> bits(saida);
+
+    // cout << "entrada\t\t" << bite << "(" << entrada << ")\n";
+    // cout << "saida\t\t" << bits << "(" << saida << ")\n\n";
+    // cout << "L " << L << "\n";
+
+        // bitset<2> bitex(extra);
+        // bitset<18>bitw(caminho);
+        // cout << "extra\t\t........" << bitex << "........\t-----------------\n";
+        // cout << "caminho\t\t" << bitw << "\t-----------------\n";
+
+        // bitset<8> biti(i);
+        // bitset<8> bite(entrada);
+        // bitset<8> bits(saida);
+        // bitset<8> biten(encontrou);
+
+        // cout << "estagio " << j << "\t";
+        // for(int k=0; k<j+1; k++) cout << "..";
+        // cout << biti;
+        // for(int k=4; k>=j+1; k--) cout << "..";
+        // cout << "\t" << "fio " << i << "\t" << " estado " << wire[i][j] << "\n";
+
+    // cout << "\n";
+
+main:
+
+        // cout << "(" << u << " -> " << v << "):\n";
+        // cout << "=========================================================\n\n";
+        
+        // if(ans) cout << "(" << i << " -> " << i+x << ") encontrou!\n";
+        // else cout << "(" << i << " -> " << i+x << ") nao encontrou...\n";
+
+        // cout << "\n =========================================================\n\n";
+    
+    // print_omega(wire);
+    // cout << "n=" << x << ":\t" << res << "%\n";
+*/

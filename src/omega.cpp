@@ -1,34 +1,47 @@
 #include "../include/auxf.h"
 
+/*  
+    fios da rede
+    salva caminho possivel
+    numero de entradas/saidas
+    numero de estagios
+    numero de estagios extra
+    quantos fios por switch
+    número de permutações para o estagio extra 
+    tamanho da janela(com todos os bits ligados)
+*/ 
 int wire[256][5];
+int line[5];
+int n, st, ex, radix, L, mask;
 
 bool omega(int entrada, int saida){
-    
-    for(int extra=0b00; extra<4; extra+=0b01){
+
+    for(int extra=0; extra<L; extra++){
 
         // Concatena entrada+extra+saida...
-        int caminho=(entrada<<10) | (extra<<8) | saida;
+        int caminho = saida | (entrada<<(2*(st+ex))) | (extra<<(2*st));
 
         // marca que encontrou um caminho
         bool encontrou=true;
 
-        for(int j=0; j<5; j++){
-            
+        for(int j=0; j<st+ex; j++){
+        
             // Pega o valor da janela atual
-            int i = 255 & (caminho >> (2*(4-j)));
+            int i = caminho >> (2*(st+ex-1-j)) & mask;
 
-            assert_values(entrada,extra,saida,caminho,i);
+            encontrou = encontrou & !wire[i][j];
 
-            if(wire[i][j]==0){ // Se o caminho não está ocupado, ocupe
-                wire[i][j]=1;
-            } else{ // senão, marca que não encontrou e permute extra
-                encontrou=false;
-                break;
-            }
-        }
+            // Se o caminho não está ocupado
+            // senão, permute bit extra
+            if(encontrou) line[j]=i;               
+            else break;
+        } 
 
-        if(encontrou) 
+        if(encontrou) {
+            for(int j=0; j<st+ex; j++)
+                wire[line[j]][j]=true;
             return true;
+        }
     }
 
     return false;
@@ -36,17 +49,35 @@ bool omega(int entrada, int saida){
 
 int main(int argc, char **argv){
 
-    int attempts, ct=0;
+    int attempts, ct=0, rounds=atoi(argv[1]);
+    
+    /* parâmetros rede multiestágio */
+    n       = atoi(argv[2]);
+    st      = atoi(argv[3]); 
+    ex      = atoi(argv[4]); 
+    radix   = atoi(argv[5]);
+    L       = (ex<1?1:radix<<ex);
+    mask    = atoi(argv[6]);
 
-    cin>>attempts;
-    for(int i=0; i<attempts; i++){
-        int u, v;
-        cin>>u>>v;
-        ct+=(omega(u,v)?1:0);
+    while(rounds--){
+
+        cin>>attempts;
+
+        for(int i=0; i<attempts; i++){
+            int u, v;
+            cin>>u>>v;
+            ct+=(omega(u,v)?1:0);
+        } 
+        
+        double res=(ct*100.0)/attempts;
+        cout << res << "\n";
+
+        // reset
+        ct=0;
+        for(int i=0; i<256; i++)
+            for(int j=0; j<5; j++)
+                wire[i][j]=0;
     }
-
-    // print_omega(wire);
-    cout << (ct*100.0)/attempts;
 
     return 0;
 }

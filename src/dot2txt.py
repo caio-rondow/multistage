@@ -4,7 +4,7 @@ import os
 import sys
 
 def name_rand(G,filename,arg1):
-    with open(filename, 'w') as f:
+    with open(filename, 'a') as f:
         f.write(str(G.number_of_edges()*arg1)+"\n")
         name=list(range(0,256))
         for it in range(arg1):
@@ -58,14 +58,19 @@ def main():
 
     arg1=int(sys.argv[1]) # número de grafos que cabem na rede
     arg2=int(sys.argv[2]) # como eu vou dar nome aos nós
+    arg3=int(sys.argv[3]) # número de rodadas
+
+    if arg1 > 256//G.number_of_edges() or arg1<0:
+        print("Erro: não cabem %d grafos na rede 256x256.", arg1)
+        exit(1)
 
     if arg2==0:
         name_seq(G,filename,arg1)
     elif arg2==1:
-        name_rand(G,filename,arg1)
+        for i in range(arg3):
+            name_rand(G,filename,arg1)
     else:
         print("Erro, não tem função de nomear definida para este id 'arg2'.")
-
 
 if __name__ == "__main__":
     main()

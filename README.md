@@ -1,23 +1,47 @@
 # Redes Multiestágio
 
+
+## Como executar?
+
+> ./run_omega.sh <num_grafos_na_rede> <tipo_nomeamento> <num_iteracoes>
+
+
 ## Resultados parciais 1:
 
-=================================================
+* Algumas informações:
 
-    > REDE OMEGA: 256x256, radix4 e 1 extra (5 estágios)
+    > Rede: 256x256, radix4 e 4 estágios + 1 extra (5 estágios)\
+    > Grafo:              Fir16\
+    > Vértices:           49\
+    > Aréstas:            63\
+    > Grau médio:         2.57\
+    > Cabem 63*4=252 "Arestas" (4 grafos Fir16)
 
-* Grafo:              Fir16
-* Vértices:           49
-* Aréstas:            63
-* Grau médio:         2.57
+* Roteamento:
 
-* Cabem 63*4=252 "Arestas" (4 grafos Fir16)
+    > Roteou 65.0794% - 1 grafo(s) - sequêncial.\
+    > Roteou 76.1905% - 1 grafo(s) - aleatório.\
+    > Roteou 16.2698% - 4 grafo(s) - sequêncial.\
+    > Roteou 59.127%  - 4 grafo(s) - aleatório.
 
-=================================================
+<hr/>
 
-    > Roteou 39.6825% - 1 grafo(s) - sequêncial.
-    > Roteou 71.4286% - 1 grafo(s) - aleatório.
-    > Roteou 9.92063% - 4 grafo(s) - sequêncial.
-    > Roteou 32.5397% - 4 grafo(s) - aleatório.
+## Resultados parciais 2:
 
-=================================================
+
+* Validação do roteamento:
+    - Teste 1: [Roteamento padrão i -> i](./misc/results/route_pattern_test1.txt)
+    - Teste 2: [Roteamento padrão i -> i+n](./misc/results/route_pattern_test2.txt)
+
+* Histograma roteando 100.000x aleatório 1 grafo (Fir16):
+
+<p align="center">
+    <img src="./misc/results/100000rand.png" width="400" height="300"/>
+</p>
+
+* Roteando após eliminar arestas do grafo para aliviar a rede:
+
+    > Roteou 93.3333% - 1 grafo(s) - sequêncial.\
+    > Roteou 23.3333% - 4 grafo(s) - sequêncial.\
+    > Roteou 100%     - 1 grafo(s) - aleatório.\
+    > Roteou 91.6667% - 4 grafo(s) - aleatório.
