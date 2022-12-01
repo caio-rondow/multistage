@@ -5,7 +5,7 @@ digraph Fir16 {
 	imult_11 [label = imult_11 ];
 	iadd_7 [label = iadd_7 ];
 	A0 [label = A0 ];
-	iadd_5 [label = iadd_5 ];/mnt/d/users/caior/documents/meus_arquivos/ufv
+	iadd_5 [label = iadd_5 ];
 	iadd_13 [label = iadd_13 ];
 	copy_7 [label = copy_7 ];
 	iadd_0 [label = iadd_0 ];
