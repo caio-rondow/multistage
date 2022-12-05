@@ -5,6 +5,10 @@
 
 > ./run_omega.sh <num_grafos_na_rede> <tipo_nomeamento> <num_iteracoes>
 
+## observação
+
+    Todos experimentos não consideraram que quando um vértice possui 2 entradas
+    são dois sinal diferentes.
 
 ## Resultados parciais 1:
 
@@ -39,9 +43,15 @@
     <img src="./misc/results/100000rand.png" width="400" height="300"/>
 </p>
 
-* Roteando após eliminar arestas do grafo para aliviar a rede:
+* Roteando após eliminar arestas do grafo para aliviar a rede (acrescentar conexão local vértice acima):
 
     > Roteou 93.3333% - 1 grafo(s) - sequêncial.\
     > Roteou 23.3333% - 4 grafo(s) - sequêncial.\
     > Roteou 100%     - 1 grafo(s) - aleatório.\
     > Roteou 91.6667% - 4 grafo(s) - aleatório.
+   
+# Considerando entradas diferentes:
+    1. estatística da distribuição dos graus de entrada Fir16 
+    2. Propor uma distribuição T1 e T2 (ou T3)
+    3. Fazer o sequencial e o randomico, pode explorar 2 opções de entrada e 2 de saida
+    4. Testar para outros grafos 
