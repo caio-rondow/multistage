@@ -3,14 +3,13 @@
 
 ## Como executar?
 
-> ./run_omega.sh <num_grafos_na_rede> <tipo_nomeamento> <num_iteracoes>
+> ./route.sh <num_grafos_na_rede> <tipo_nomeamento> <num_iteracoes>
 
 ## observação
 
 > Todos experimentos não consideraram que quando um vértice possui 2 entradas 
 são dois sinal diferentes.\
-
-> Como a lista de arestas foi gerada: profundidade, na direção da saida para entrada.
+Como a lista de arestas foi gerada: profundidade, na direção da saida para entrada.
 
 ## Resultados parciais 1:
 
