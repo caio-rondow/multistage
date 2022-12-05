@@ -61,8 +61,8 @@ def main():
     arg3=int(sys.argv[3]) # número de rodadas
 
     if arg1 > 256//G.number_of_edges() or arg1<0:
-        print("Erro: não cabem %d grafos na rede 256x256.", arg1)
-        exit(1)
+        print(f"Erro: não cabem {arg1} grafos na rede 256x256.")
+        sys.exit(0)
 
     if arg2==0:
         name_seq(G,filename,arg1)
