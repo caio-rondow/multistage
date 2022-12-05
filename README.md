@@ -7,11 +7,10 @@
 
 ## observação
 
-    Todos experimentos não consideraram que quando um vértice possui 2 entradas
-    são dois sinal diferentes.
-    
-    Como a lista de arestas foi gerada:
-        profundidade, na direção da saida para entrada.
+> Todos experimentos não consideraram que quando um vértice possui 2 entradas 
+são dois sinal diferentes.\
+
+> Como a lista de arestas foi gerada: profundidade, na direção da saida para entrada.
 
 ## Resultados parciais 1:
 
@@ -34,7 +33,6 @@
 <hr/>
 
 ## Resultados parciais 2:
-
 
 * Validação do roteamento:
     - Teste 1: [Roteamento padrão i -> i](./misc/results/route_pattern_test1.txt)
