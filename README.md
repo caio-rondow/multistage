@@ -100,7 +100,7 @@ cosine1|16|24|26|0|76
 
     > Nesse caso não da pra colocar mais de um grafo na rede, porque o primeiro grafo já ocupa 33 dos 63 rótulos de grau 1. Logo, o segundo teria apenas 30 rótulos, mas são necessários 33.
 ***
-### 3. Fazer o sequencial e o aleatório
+### 3. Fazer o roteamento sequencial e o aleatório (Fir16)
 
 * Roteamento considerando entradas diferentes:
 
