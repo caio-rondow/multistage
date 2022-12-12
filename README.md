@@ -3,7 +3,11 @@
 
 ## Como executar?
 
-> ./route.sh <num_grafos_na_rede> <tipo_nomeamento> <num_iteracoes>
+> ./route.sh <grafo\> <num_grafos_na_rede> <tipo_nomeamento> <num_iteracoes>\
+
+> Para executar todos os grafos em misc\benchmark\dot:\
+./route.sh all <num_grafos_na_rede> <tipo_nomeamento> <num_iteracoes>
+
 
 ## observação
 
@@ -100,7 +104,7 @@ cosine1|16|24|26|0|76
 
     > Nesse caso não da pra colocar mais de um grafo na rede, porque o primeiro grafo já ocupa 33 dos 63 rótulos de grau 1. Logo, o segundo teria apenas 30 rótulos, mas são necessários 33.
 ***
-### 3. Fazer o roteamento sequencial e o aleatório (Fir16)
+### 3. Fazer o sequencial e o aleatório
 
 * Roteamento considerando entradas diferentes:
 
