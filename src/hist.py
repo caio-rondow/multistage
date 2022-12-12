@@ -25,6 +25,7 @@ def main():
     sorted_h.sort()    
 
     for value in sorted_h:
+
         if value < 69:
             try:
                 hist['65-68%']+=1
@@ -48,6 +49,24 @@ def main():
                 hist['75-77%']+=1
             except:
                 hist['75-77%']=1
+        
+        if value < 93:
+            try:
+                hist['80-92%']+=1
+            except:
+                hist['80-92%']=1       
+
+        elif value < 96:
+            try:
+                hist['93-95%']+=1
+            except:
+                hist['93-95%']=1
+    
+        elif value < 100:
+            try:
+                hist['96-100%']+=1
+            except:
+                hist['96-100%']=1
         
     print(hist)
     

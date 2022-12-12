@@ -11,7 +11,7 @@
     tamanho da janela(com todos os bits ligados)
 */ 
 int wire[256][5];
-int line[5];
+int path[5];
 int n, st, ex, radix, L, mask;
 
 bool omega(int entrada, int saida){
@@ -33,13 +33,13 @@ bool omega(int entrada, int saida){
 
             // Se o caminho não está ocupado
             // senão, permute bit extra
-            if(encontrou) line[j]=i;               
+            if(encontrou) path[j]=i;               
             else break;
         } 
 
         if(encontrou) {
             for(int j=0; j<st+ex; j++)
-                wire[line[j]][j]=true;
+                wire[path[j]][j]=true;
             return true;
         }
     }
@@ -67,15 +67,15 @@ int main(int argc, char **argv){
             int u, v;
             cin>>u>>v;
             ct+=(omega(u,v)?1:0);
-        } 
+        }
         
         double res=(ct*100.0)/attempts;
         cout << res << "\n";
 
         // reset
         ct=0;
-        for(int i=0; i<256; i++)
-            for(int j=0; j<5; j++)
+        for(int i=0; i<n; i++)
+            for(int j=0; j<st+ex; j++)
                 wire[i][j]=0;
     }
 

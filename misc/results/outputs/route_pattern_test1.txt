@@ -1,0 +1,5 @@
+0 ESTÁGIO EXTRA
+Roteou 100% - 1 grafo(s) - sequêncial.
+
+1 ESTÁGIO EXTRA
+Roteou 100% - 1 grafo(s) - sequêncial.
