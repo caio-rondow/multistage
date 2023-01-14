@@ -3,46 +3,9 @@ import random as rand
 import os
 import sys
 
-def name_rand(G,filename,arg1):
-    with open(filename, 'a') as f:
-        f.write(str(G.number_of_edges()*arg1)+"\n")
-        name=list(range(0,256))
-        for it in range(arg1):
-            label=dict()
-            _str=""
-            for edge in G.edges():
-                if edge[0] not in label: 
-                    item=rand.choice(name)
-                    label[edge[0]]=item
-                    name.remove(item)
-                if edge[1] not in label:
-                    item=rand.choice(name)
-                    label[edge[1]]=item
-                    name.remove(item)
-                _str+=str(label[edge[0]])+" "+str(label[edge[1]])+"\n"
-            f.write(_str)
-        f.close()
-
-def name_seq(G,filename,arg1):
-    with open(filename, 'w') as f:
-        f.write(str(G.number_of_edges()*arg1)+"\n")
-        label=dict()
-        name=0
-        for it in range(arg1):
-            _str=""
-            for edge in G.edges():
-                if edge[0] not in label: 
-                    label[edge[0]]=name
-                    name+=1
-                if edge[1] not in label:
-                    label[edge[1]]=name
-                    name+=1
-                _str+=str(label[edge[0]])+" "+str(label[edge[1]])+"\n"
-            f.write(_str)
-        f.close()
-
 def name_seq_v2(G,filename,arg1):
     ct=0
+    
     with open(filename, 'w') as f:
         f.write(str(G.number_of_edges()*arg1)+"\n")
         label=dict()
@@ -100,7 +63,6 @@ def name_rand_v2(G,filename,arg1):
                     labels2[0].remove(name)
 
             for u,v in G.edges():
-
                 if v not in visited:
                     visited.append(v)
                 else:
@@ -113,8 +75,65 @@ def name_rand_v2(G,filename,arg1):
             f.write(_str)
         f.close()
 
-def main():
+def name_by_histogram(G, src='', filename='', arg1=1):
+    
+    src='A0' # mudar isso aqui dps (esse src é do fir16)
+    # Create table
+    table=[None for i in range(256)]
 
+    pos=0
+    for i in range(4):
+        for j in range(4):
+            for k in range(16):
+                table[pos]=(i*16)+(j*64)+k
+                pos+=1
+
+    for i in range(256):
+        print('{:08b}'.format(table[i]))
+    print()
+
+    # get traversal path (dfs)
+    path = list(nx.edge_dfs(G,source=src,orientation='reverse'))
+
+    # Name graph
+    label={}
+    visited={}
+    pos=0
+    ct=0
+    with open(filename, 'w') as f:
+        f.write(str(G.number_of_edges()*arg1)+"\n")
+        _str=""
+        for (input, output, ignore) in path:
+            
+            if output not in visited:
+                label[output]=table[pos]
+                pos+=1
+                ct+=1
+                visited[output]=0
+            elif visited[output]==0:
+                visited[output]+=1
+            elif visited[output]>=1:
+                label.update({output:table[pos]})
+                pos+=1
+                ct+=1
+                visited[output]+=1
+
+            if input not in visited:
+                label[input]=table[pos]
+                pos+=1
+                ct+=1
+                visited[input]=0
+            
+            #_str+=input+":"+str(label[input])+" | "+str(output)+":"+str(label[output])+"\n"
+            _str+=str(label[input])+" "+str(label[output])+"\n"
+        f.write(_str)
+        f.close()
+
+    #print(ct)
+    pass
+
+def main():
+    print(sys.argv[4])
     # READ DOT
     filename='./misc/benchmark/dot/'+sys.argv[4] # MUDAR AQUI
 
@@ -138,13 +157,11 @@ def main():
 
     for i in range(arg3):
         if arg2==0:
-            name_seq(G,filename,arg1)
-        elif arg2==1:
-            name_rand(G,filename,arg1)
-        elif arg2==2:
             name_seq_v2(G,filename,arg1)
-        elif arg2==3:
+        elif arg2==1:
             name_rand_v2(G,filename,arg1)
+        elif arg2==2:
+            name_by_histogram(G,'',filename, arg1)
         else:
             print("Erro, não tem função de nomear definida para este id 'arg2'.")
 

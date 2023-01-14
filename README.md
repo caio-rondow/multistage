@@ -216,3 +216,28 @@ cosine1|16|24|26|0|76
     simple  |57.1429|1|aleatório|1
     simple  |100|1|T2 sequencial|1
     simple  |100|1|T2 aleatório|1
+
+***
+
+## Resultados parciais 4:
+
+### Roteando com duas passadas:
+
+Grafo|Rotulamento|Roteado(%)|N° arestas primeira passada|N° arestas segunda passada|Total
+---|---|---|---|---|---|
+Fir16|sequencial T2|100|61|2|63
+Fir16|aleatório T2|100|61|2|63
+interpolate_aux|sequencial T2|99.0385|89|15|104
+interpolate_aux|aleatório T2|100|94|10|104
+feedback_points|sequencial T2|100|51|0|51
+feedback_points|aleatório T2|100|51|0|51
+
+***
+
+<p align="center">
+    <img src="./misc/results/histograms/distrib_fir16_rand.svg" width="800" height="600"/>
+</p>
+
+
+
+https://excalidraw.com/#json=GTrRFjLosl7m_28-Dths1,Pa5u9hOli3ouL2DkZGeTCw

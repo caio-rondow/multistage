@@ -32,17 +32,13 @@ if [ $graph == $strval ]; then
             echo "|sequencial|$ex"
         elif (($name == 1)); then
             echo "|aleatório|$ex"
-        elif (($name == 2)); then
-            echo "|T2 sequencial|$ex"
-        else
-            echo "|T2 aleatório|$ex"
         fi
     done
 else 
     command python3 ./src/input.py $in_net $name $rounds "$graph.dot"
 
     # Roteando na rede
-    # command g++ ./src/omega.cpp # Fazer o makefile...
+    command g++ ./src/omega.cpp # Fazer o makefile...
     res=$(command ./a.out $rounds $N $st $ex $radix $mask  < $filename)
 
     # Saida...
@@ -53,8 +49,6 @@ else
     elif (($name == 1)); then
         echo "- aleatório - $ex estágios extras."
     elif (($name == 2)); then
-        echo "- T2 sequencial - $ex estágios extras."
-    else
-        echo "- T2 aleatório - $ex estágios extras."
+        echo "- histograma - $ex estágios extras."
     fi
 fi

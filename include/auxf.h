@@ -1,5 +1,7 @@
 #include <iostream>
+#include <vector>
 #include <bitset>
+#include <string>
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -20,6 +22,12 @@ void print_omega(int wire[256][5]){
             cout << wire[i][j] << " ";
         } cout << "\n";
     } cout << "\n";
+}
+
+void clear_omega(int wire[256][5], int n, int m){
+    for(int i=0; i<n; i++)
+        for(int j=0; j<m; j++)
+            wire[i][j]=0;
 }
 
 void assert_values(int entrada, int extra, int saida, int caminho, int i){

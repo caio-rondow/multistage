@@ -2,5 +2,6 @@
     "files.associations": {
         "bitset": "cpp",
         "iostream": "cpp"
-    }
+    },
+    "python.analysis.typeCheckingMode": "off",
 }
