@@ -3,9 +3,9 @@
 
 ## Como executar?
 
-> ./route.sh <grafo\> <num_grafos_na_rede> <tipo_nomeamento> <num_iteracoes>\
+> ./route.sh <grafo\> <num_grafos_na_rede> <tipo_nomeamento> <num_iteracoes>
 
-> Para executar todos os grafos em misc\benchmark\dot:\
+> Para executar todos os grafos em 'misc\benchmark\dot':\
 ./route.sh all <num_grafos_na_rede> <tipo_nomeamento> <num_iteracoes>
 
 
