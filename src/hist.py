@@ -10,76 +10,46 @@ import pandas as pd
 def main():
 
     filename=sys.argv[1]
+    ex = sys.argv[2]
+    rounds = sys.argv[3]
+    in_net = sys.argv[4]
+    graphname=sys.argv[5].split('.')[0]
 
-    with open(filename, 'r') as f:
-        lines = [line.rstrip() for line in f] 
-        h = dict(enumerate(list(map(float, lines))))
-        f.close()
+    # Read the .txt file and store the values in a list
+    with open(filename) as f:
+        values = f.readlines()
+    values = [float(x.strip()) for x in values]
 
-    source =  pd.DataFrame.from_dict(h,orient='index',columns=['resultado'])
-    print(source.describe())
+    # Create a histogram using the values
+    print(pd.DataFrame(values).describe())
+    n, bins, patches = plt.hist(values, bins=11, histtype='bar', edgecolor='black', linewidth=1.2)
+    hist, bin_edges = np.histogram(values, bins=11)
+    plt.xticks(bin_edges[:-1] + (bin_edges[1] - bin_edges[0])/2)
 
-    hist=dict()
+    # Add labels to the top of each bar
+    for i in range(len(patches)):
+        patch = patches[i]
+        patch_height = patch.get_height()
+        plt.annotate(str(int(patch_height)), 
+                    (patch.get_x() + patch.get_width()/2., patch_height), 
+                    ha='center', va='center', xytext=(0, 10), 
+                    textcoords='offset points')
 
-    sorted_h=list(h.values())
-    sorted_h.sort()    
-
-    for value in sorted_h:
-
-        if value < 69:
-            try:
-                hist['65-68%']+=1
-            except:
-                hist['65-68%']=1       
-
-        elif value < 72:
-            try:
-                hist['69-71%']+=1
-            except:
-                hist['69-71%']=1
+    plt.xlabel('% roteada')
+    plt.ylabel('frequencia')
+    plt.title(f'Rotulamento aleatorio - {ex} extra')
     
-        elif value < 75:
-            try:
-                hist['72-74%']+=1
-            except:
-                hist['72-74%']=1
+    figure = plt.gcf()  
+    figure.set_size_inches(12,10)
 
-        elif value < 78:
-            try:
-                hist['75-77%']+=1
-            except:
-                hist['75-77%']=1
-        
-        if value < 93:
-            try:
-                hist['80-92%']+=1
-            except:
-                hist['80-92%']=1       
-
-        elif value < 96:
-            try:
-                hist['93-95%']+=1
-            except:
-                hist['93-95%']=1
+    path = "misc/results/histograms/"+rounds+"aleatorio"
     
-        elif value < 100:
-            try:
-                hist['96-100%']+=1
-            except:
-                hist['96-100%']=1
-        
-    print(hist)
+    if not os.path.exists(path):
+        os.makedirs(path)
     
-    df =  pd.DataFrame.from_dict(hist,orient='index',columns=['Roteado'])
-    print(df.to_string())
+    plt.savefig(f"{path}/{in_net}{graphname}_{ex}ex.png", dpi=300, bbox_inches='tight')
+    #plt.show()
 
-    plt.bar(list(hist.keys()), list(hist.values()))
-
-    plt.title('Histograma 100000 grafos aleatórios')
-    plt.xlabel('Roteado (%)')
-    plt.ylabel('Quantidade')
-    
-    plt.show()
 
 if __name__ == "__main__":
     main()

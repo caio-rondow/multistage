@@ -2,3 +2,5 @@
 *.identifier
 venv/
 .vscode/*
+./include/inprogress
+misc/benchmark/input/*

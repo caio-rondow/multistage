@@ -39,37 +39,45 @@ def name_seq_v2(G,filename,arg1):
 def name_rand_v2(G,filename,arg1):
     
     ct=0
-    with open(filename, 'a') as f:
+    with open(filename, 'w') as f:
+
+        #labels1=list(range(0,64))
+        #labels2=[list(range(64,128)), list(range(128, 192))]
+        
+        labels=list(range(0,256))
+        label=dict()
         f.write(str(G.number_of_edges()*arg1)+"\n")
 
-        labels1=list(range(0,64))
-        labels2=[list(range(64,128)), list(range(128, 192))]
-        
         for it in range(arg1):
-            label=dict()
             visited=[]
             _str=""
         
             for node in G.nodes():
                 if G.in_degree(node)<=1:
                     ct+=1
-                    name=rand.choice(labels1)
+                    #name=rand.choice(labels1)
+                    name=rand.choice(labels)
                     label[node]=name
-                    labels1.remove(name)
+                    labels.remove(name)
+                    #labels1.remove(name)
                 else:
                     ct+=1
-                    name=rand.choice(labels2[0])
+                    # name=rand.choice(labels2[0])
+                    name=rand.choice(labels)
                     label[node]=name
-                    labels2[0].remove(name)
+                    labels.remove(name)
+                    # labels2[0].remove(name)
 
             for u,v in G.edges():
                 if v not in visited:
                     visited.append(v)
                 else:
                     ct+=1
-                    name=rand.choice(labels2[1])
+                    # name=rand.choice(labels2[1])
+                    name=rand.choice(labels)
                     label.update({v:name})
-                    labels2[1].remove(name)
+                    # labels2[1].remove(name)
+                    labels.remove(name)
 
                 _str+=str(label[u])+" "+str(label[v])+"\n"
             f.write(_str)
@@ -88,9 +96,9 @@ def name_by_histogram(G, src='', filename='', arg1=1):
                 table[pos]=(i*16)+(j*64)+k
                 pos+=1
 
-    for i in range(256):
-        print('{:08b}'.format(table[i]))
-    print()
+    # for i in range(256):
+    #     print('{:08b}'.format(table[i]))
+    # print()
 
     # get traversal path (dfs)
     path = list(nx.edge_dfs(G,source=src,orientation='reverse'))
@@ -133,9 +141,10 @@ def name_by_histogram(G, src='', filename='', arg1=1):
     pass
 
 def main():
-    print(sys.argv[4])
+
+    # print(sys.argv[4])
     # READ DOT
-    filename='./misc/benchmark/dot/'+sys.argv[4] # MUDAR AQUI
+    filename='./misc/benchmark/dot/'+sys.argv[4] 
 
     with open(filename) as f:        
         G = nx.DiGraph(nx.nx_pydot.read_dot(filename))
@@ -145,7 +154,7 @@ def main():
     G.remove_nodes_from(remove)
 
     # WRITE TXT
-    filename='./misc/benchmark/input/graph.txt' # MUDAR AQUI
+    filename='./misc/benchmark/input/graph' # MUDAR AQUI
 
     arg1=int(sys.argv[1]) # número de grafos que cabem na rede
     arg2=int(sys.argv[2]) # como eu vou dar nome aos nós
@@ -159,7 +168,7 @@ def main():
         if arg2==0:
             name_seq_v2(G,filename,arg1)
         elif arg2==1:
-            name_rand_v2(G,filename,arg1)
+            name_rand_v2(G,filename+str(i)+".txt",arg1)
         elif arg2==2:
             name_by_histogram(G,'',filename, arg1)
         else:
