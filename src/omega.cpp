@@ -52,6 +52,7 @@ bool Omega::route(int input, int output){
             return true;
         }
     }
+
     return false;
 }
 

@@ -20,8 +20,12 @@ def main():
         values = f.readlines()
     values = [float(x.strip()) for x in values]
 
-    # Create a histogram using the values
+    # printing info...
+    print()
+    print(pd.DataFrame(values).value_counts())
     print(pd.DataFrame(values).describe())
+
+    # Create a histogram using the values
     n, bins, patches = plt.hist(values, bins=11, histtype='bar', edgecolor='black', linewidth=1.2)
     hist, bin_edges = np.histogram(values, bins=11)
     plt.xticks(bin_edges[:-1] + (bin_edges[1] - bin_edges[0])/2)
@@ -34,7 +38,7 @@ def main():
                     (patch.get_x() + patch.get_width()/2., patch_height), 
                     ha='center', va='center', xytext=(0, 10), 
                     textcoords='offset points')
-
+        
     plt.xlabel('% roteada')
     plt.ylabel('frequencia')
     plt.title(f'Rotulamento aleatorio - {ex} extra')

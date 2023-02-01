@@ -83,8 +83,82 @@ def name_rand_v2(G,filename,arg1):
             f.write(_str)
         f.close()
 
+def rotula(visited , labels, label, v):
+    # marca como visitado
+    visited[v]=0
+
+    # rotula v
+    nameV = rand.choice(labels)
+    label[v] = nameV
+    labels.remove(nameV)
+
+def name_rand_v3(G,filename,arg1):
+    rand.seed(1)
+    # for e in G.edges(): print(e)
+    with open(filename+".txt", 'w') as f:
+
+        f.write(str(G.number_of_edges()*arg1)+"\n")
+
+        for it in range(arg1):
+            input=""
+            visited=dict()
+            label=dict()
+            labels=list(range(256))
+
+            # percorre o grafo e vê quem tem multicast
+            multicast_nodes = [node for node in G.nodes() if G.out_degree(node)>1]
+
+            # para cada nó multicast
+            for node in multicast_nodes:
+                # pega os vizinhos, e escolhe os nomes
+                neighbors = list(G.neighbors(node))
+                name = rand.choice(labels)&252
+                permutations = [name, name+1, name+2, name+3]
+                neighbors_name = rand.sample(permutations, len(neighbors))
+                
+                # para cada vizinho, rotule-o
+                for neighbor, name in zip(neighbors,neighbors_name):
+                    label[neighbor] = name
+                    if name in labels:
+                        labels.remove(name)
+                    
+                    # marca como visitado de multicast
+                    visited[neighbor] = None
+            
+            print("digraph Fir16 {")
+            for (u,v) in G.edges(): 
+                
+                # Se vertice não foi visitado, visita e rotula
+                if u not in visited:
+                    rotula(visited, labels, label, u)
+                if v not in visited:
+                    rotula(visited, labels, label, v)            
+
+                # se o vertice de saida não for um nó de saida do multicast
+                if visited[v]!=None: 
+
+                    # indica o grau de entrada do vértice v
+                    visited[v]+=1
+            
+                    # mais de 1 entrada, mude de nome
+                    if visited[v]>=2:
+                        # pega os rotulos
+                        newLabel = rand.choice(labels)
+                        oldLabel = label[v]
+
+                        # atualiza lista de rotulos
+                        label.update({v:newLabel})
+                        labels.append(oldLabel)
+                        labels.remove(newLabel)
+                input+=str(label[u])+" "+str(label[v])+"\n"
+                print(f"\t{u}->{v} [label=\"({label[u]}, {label[v]})\"]")
+            print("}")
+            f.write(input)
+        f.close()
+
+
 def name_by_histogram(G, src='', filename='', arg1=1):
-    
+   
     src='A0' # mudar isso aqui dps (esse src é do fir16)
     # Create table
     table=[None for i in range(256)]
@@ -97,7 +171,7 @@ def name_by_histogram(G, src='', filename='', arg1=1):
                 pos+=1
 
     # for i in range(256):
-    #     print('{:08b}'.format(table[i]))
+    #     print('/{:08b}'.format(table[i]))
     # print()
 
     # get traversal path (dfs)
@@ -166,11 +240,11 @@ def main():
 
     for i in range(arg3):
         if arg2==0:
-            name_seq_v2(G,filename,arg1)
+            name_seq_v2(G,filename+str(i)+".txt",arg1)
         elif arg2==1:
             name_rand_v2(G,filename+str(i)+".txt",arg1)
         elif arg2==2:
-            name_by_histogram(G,'',filename, arg1)
+            name_rand_v3(G,filename+str(i)+".txt",arg1)
         else:
             print("Erro, não tem função de nomear definida para este id 'arg2'.")
 

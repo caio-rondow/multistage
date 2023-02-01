@@ -3,10 +3,11 @@ declare -i COUNT=0
 declare -i N=256
 declare -i ST=4
 #   IMPORTANT ONES...  #
-declare -i TYPE=1      # 0 sequential, 1 random
-declare -i EX=2        # extra stages
-declare -i IN_NET=2    # number of graphs in net
+declare -i TYPE=2      # 0 sequential, 1 random, 2 smart random
+declare -i EX=1        # extra stages
+declare -i IN_NET=1    # number of graphs in net
 declare -i ROUNDS=1000 # how much iterations
+declare -i TWOTRIPS=0  # 0 two trips off, 1 two trips on
 # ==================== #
 
 arg=$1      # simulate a single graph
@@ -52,7 +53,13 @@ make -f makefile -s
 
 # network info
 echo "Info:"
-echo -e "input/output\t$N\nstage(s)\t$ST\nextra(s)\t$EX\nround(s)\t$ROUNDS\n"
+echo -e "input/output\t$N\nstage(s)\t$ST\nextra(s)\t$EX\nround(s)\t$ROUNDS\nin net\t\t$IN_NET graph(s)"
+if [ $TYPE -eq 1 ]; then 
+    echo -e "label\t\trandom" 
+else 
+    echo -e "label\t\tsequential" 
+fi
+echo -e "num. trips\t$(($TWOTRIPS+1))\n"
 
 for ((i=0; i < ${#GRAPH[@]}; i++)) do
 
@@ -65,7 +72,7 @@ for ((i=0; i < ${#GRAPH[@]}; i++)) do
     # route labeled graphs
     > misc/results/outputs/values.txt
     for FILE in ./misc/benchmark/input/*; do
-        command bin/main.out < $FILE $N $ST $EX >> misc/results/outputs/values.txt
+        command bin/main.out < $FILE $N $ST $EX $TWOTRIPS >> misc/results/outputs/values.txt
         echo "$COUNT"
         COUNT+=1
     done | pv -l -s $ROUNDS > /dev/null
