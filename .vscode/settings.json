@@ -1,8 +1,0 @@
-{
-    "files.associations": {
-        "bitset": "cpp",
-        "iostream": "cpp"
-    },
-    "python.analysis.typeCheckingMode": "off",
-    "git.ignoreLimitWarning": true,
-}

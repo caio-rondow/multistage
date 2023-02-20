@@ -1,5 +1,5 @@
-#ifndef OMEGA_H__
-#define OMEGA_H__
+#ifndef OMEGA_H
+#define OMEGA_H
 
 #include <iostream>
 #include <vector>
@@ -17,10 +17,9 @@ using namespace std;
 class Omega{
 
 private:
-    char wire[MAX_IN][MAX_ST];
-    int free[MAX_IN][MAX_ST];
-    int n, st, ex, radix, L, mask;
-    vector<pair<int,int>> fail;
+    char circuit[MAX_IN][MAX_ST];   // estado do circuito 
+    int free[MAX_IN][MAX_ST];       // switches livres
+    int n, st, ex, radix, L, mask;  // parametros da rede 
 
 public:
 

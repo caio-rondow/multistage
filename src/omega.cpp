@@ -37,18 +37,20 @@ bool Omega::route(int input, int output){
             // se o caminho esta ocupado
             // senão, permute um bit extra
             if(free[i][j]) 
-                result = result && (wire[i][j]==in_switch); 
+                result = result && (circuit[i][j]==in_switch); 
         }
 
         // se encontrou um caminho...
         if(result){
+            cout << input << "\n";
             for(int j=0; j<st+ex; j++){
-                i = (word >> (2*(st+ex)- 2*(j+1))) & mask;
+                i = (word >> (2*(st+ex) - 2*(j+1))) & mask;
                 in_switch = (word >> (2*(2*st+ex-1)-2*j)) & 3;
-                // marca o caminho que fez em wire
+                // marca o caminho que fez em circuit
                 free[i][j] = true;
-                wire[i][j] = in_switch;
-            }
+                circuit[i][j] = in_switch;
+                cout << i << "\n";
+            } //cout << "\n";
             return true;
         }
     }
@@ -60,7 +62,7 @@ void Omega::clear(){ // reseta a rede
     for(int i=0; i<n; i++){
         for(int j=0; j<st+ex; j++){
             free[i][j]=false;
-            wire[i][j]=false;
+            circuit[i][j]=false;
         }
     }
 }

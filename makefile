@@ -1,22 +1,51 @@
-CC = g++
-CFLAGS = -std=c++11 -Wall -O2
-SRC_DIR = src
-INC_DIR = include
-BIN_DIR = bin
+CXX      := -c++
+CXXFLAGS := -pedantic-errors -Wall -Wextra -Werror -Wno-unused-parameter
+LDFLAGS  := -L/usr/lib -lstdc++ -lm
+BUILD    := ./build
+OBJ_DIR  := $(BUILD)/objects
+APP_DIR  := $(BUILD)/apps
+TARGET   := program
+INCLUDE  := -Iinclude/
+SRC      :=                      \
+   $(wildcard src/module1/*.cpp) \
+   $(wildcard src/module2/*.cpp) \
+   $(wildcard src/*.cpp)         \
 
-all: main clean
+OBJECTS  := $(SRC:%.cpp=$(OBJ_DIR)/%.o)
+DEPENDENCIES \
+         := $(OBJECTS:.o=.d)
 
-main: main.o omega.o
-	$(CC) $(CFLAGS) -o $(BIN_DIR)/main.out $(SRC_DIR)/main.o $(SRC_DIR)/omega.o
+all: build $(APP_DIR)/$(TARGET)
 
-main.o: $(SRC_DIR)/main.cpp
-	$(CC) $(CFLAGS) -I $(INC_DIR) -c $(SRC_DIR)/main.cpp -o $(SRC_DIR)/main.o
+$(OBJ_DIR)/%.o: %.cpp
+	@mkdir -p $(@D)
+	$(CXX) $(CXXFLAGS) $(INCLUDE) -c $< -MMD -o $@
 
-omega.o: $(SRC_DIR)/omega.cpp $(INC_DIR)/omega.h
-	$(CC) $(CFLAGS) -I $(INC_DIR) -c $(SRC_DIR)/omega.cpp -o $(SRC_DIR)/omega.o
+$(APP_DIR)/$(TARGET): $(OBJECTS)
+	@mkdir -p $(@D)
+	$(CXX) $(CXXFLAGS) -o $(APP_DIR)/$(TARGET) $^ $(LDFLAGS)
 
-clean: 
-	rm -f $(SRC_DIR)/*.o
+-include $(DEPENDENCIES)
 
-install:
-	cp $(BIN_DIR)/main.out /usr/local/bin
+.PHONY: all build clean debug release info
+
+build:
+	@mkdir -p $(APP_DIR)
+	@mkdir -p $(OBJ_DIR)
+
+debug: CXXFLAGS += -DDEBUG -g
+debug: all
+
+release: CXXFLAGS += -O2
+release: all
+
+clean:
+	-@rm -rvf $(OBJ_DIR)/*
+	-@rm -rvf $(APP_DIR)/*
+
+info:
+	@echo "[*] Application dir: ${APP_DIR}     "
+	@echo "[*] Object dir:      ${OBJ_DIR}     "
+	@echo "[*] Sources:         ${SRC}         "
+	@echo "[*] Objects:         ${OBJECTS}     "
+	@echo "[*] Dependencies:    ${DEPENDENCIES}"
