@@ -5,5 +5,4 @@ venv/
 misc/old_files/
 misc/benchmark/input/*
 misc/results/histograms/*
-build/apps/program
 build/objects/src/*
