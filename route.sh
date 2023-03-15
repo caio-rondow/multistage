@@ -3,11 +3,11 @@ declare -i COUNT=0
 declare -i N=256
 declare -i ST=4
 #   IMPORTANT ONES...  #
-declare -i TYPE=2      # 0 sequential, 1 random, 2 smart random
-declare -i EX=1        # extra stages
-declare -i IN_NET=1    # number of graphs in net
+declare -i TYPE=0      # 0 sequential, 1 random, 2 smart random, 3 check for no used labels
+declare -i EX=4        # extra stages
+# declare -i IN_NET=7    # number of graphs in net
 declare -i ROUNDS=1    # how much iterations
-declare -i TWOTRIPS=1  # 0 two trips off, 1 two trips on
+declare -i TWOTRIPS=0  # 0 two trips off, 1 two trips on
 # ==================== #
 
 arg=$1      # simulate a single graph
@@ -47,31 +47,56 @@ else
     exit 1
 fi
 
-# max graphs in net
+# # max graphs in net
 MAX_IN_NET=(
     4	# Cplx8.dot
     3	# FilterRGB.dot
     4	# Fir16.dot
-    8	# arf.dot
-    9	# conv3.dot
-    3	# cosine1.dot
+    6	# arf.dot 
+    7	# conv3.dot 
+    2	# cosine1.dot
     2	# cosine2.dot
     5	# ewf.dot
-    5	# feedback_points.dot
-    5	# fir.dot
-    5	# fir1.dot
-    6	# fir2.dot
-    4	# h2v2_smooth.dot
-    16	# horner_bezier_surf.dot
-    2	# interpolate_aux.dot
+    3	# feedback_points.dot 
+    3	# fir.dot 
+    3	# fir1.dot 
+    4	# fir2.dot 
+    3	# h2v2_smooth.dot 
+    12	# horner_bezier_surf.dot 
+    1	# interpolate_aux.dot 
     1	# jpeg_fdct_islow.dot
     1	# jpeg_idct_ifast.dot
     3	# k4n4op.dot
-    19	# mac.dot
-    8	# motion_vectors.dot
-    11	# mults1.dot
-    18	# simple.dot
+    16	# mac.dot 
+    5	# motion_vectors.dot 
+    9	# mults1.dot 
+    14	# simple.dot 
 )
+
+# remaining_labels=(
+#     244
+#     216
+#     256
+#     228
+#     252
+#     184
+#     244
+#     245
+#     216
+#     195
+#     195
+#     220
+#     213
+#     240
+#     152
+#     234
+#     234
+#     216
+#     256
+#     215
+#     216
+#     252
+# )
 
 # run make
 command make -s
@@ -91,11 +116,10 @@ echo -e "num. trips\t$(($TWOTRIPS+1))\n"
 # RUN CODE HERE
 for ((i=0; i < ${#GRAPH[@]}; i++)) do
     # echo "${GRAPH[i]} ok"
-    # ./build/apps/program ${GRAPH[i]} $N $ST $EX $TWOTRIPS ${MAX_IN_NET[i]} $ROUNDS $TYPE > misc/values.txt
-    # command python3 src/histogram.py misc/values.txt $EX $ROUNDS ${MAX_IN_NET[i]} ${GRAPH[i]}
+    ./build/apps/program ${GRAPH[i]} $N $ST $EX $TWOTRIPS ${MAX_IN_NET[i]} $ROUNDS $TYPE > misc/values.txt
+    command python3 src/histogram.py misc/values.txt $EX $ROUNDS ${MAX_IN_NET[i]} ${GRAPH[i]}
     
-    
-    ./build/apps/program ${GRAPH[i]} $N $ST $EX $TWOTRIPS $IN_NET $ROUNDS $TYPE > misc/values.txt
+    # ./build/apps/program ${GRAPH[i]} $N $ST $EX $TWOTRIPS $IN_NET $ROUNDS $TYPE > misc/values.txt
     # command python3 src/histogram.py misc/values.txt $EX $ROUNDS IN_NET ${GRAPH[i]}
 
 done

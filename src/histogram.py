@@ -21,7 +21,8 @@ def main():
     values = [float(x.strip()) for x in values]
 
     # printing info...
-    print("{:.<20}{}".format(graphname, max(values)))
+    # print("{:.<20}{}".format(graphname, max(values)))
+    print(graphname, max(values))
     # print(pd.DataFrame(values).value_counts())
     # print(pd.DataFrame(values).describe())
 
@@ -46,12 +47,12 @@ def main():
     figure = plt.gcf()  
     figure.set_size_inches(12,10)
 
-    path = "misc/histograms/"+rounds+"_random"
+    path = "misc/histograms/"+rounds+"_smart"
     
     if not os.path.exists(path):
         os.makedirs(path)
     
-    plt.savefig(f"{path}/{in_net}{graphname}_{ex}ex.png", dpi=300, bbox_inches='tight')
+    plt.savefig(f"{path}/{in_net}{graphname}_{ex}ex__.png", dpi=300, bbox_inches='tight')
     #plt.show()
 
 

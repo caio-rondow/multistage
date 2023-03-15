@@ -17,12 +17,12 @@ int main(int argc, char *argv[]){
     int in_net=atoi(argv[6]);
     int rounds=atoi(argv[7]);
     int type=atoi(argv[8]);
-    
+
     /* create graph, labeler and network */
     Dot2Graph convert;
     Digraph G = convert.read_dot("misc/benchmark/dot/"+filename, in_net);
     Label labeler(G, type);
-    Omega net(n, st, ex);
+    Omega net = Omega(n,st,ex);
     int num_edges=G.number_of_edges();
 
     while(rounds--){
@@ -40,8 +40,9 @@ int main(int argc, char *argv[]){
             ss << file;
             ss >> u >> v;
             bool ans = net.route(u,v);
-            if(!ans)
+            if(!ans){
                 fail.push_back(make_pair(u,v));
+            }
             count+=ans;
         }
 
@@ -58,10 +59,6 @@ int main(int argc, char *argv[]){
         if(result == 100.0) return 0;
         net.clear();
     }
-
-    // auto end = std::chrono::high_resolution_clock::now();
-    // auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
-    // std::cout << "Duration: " << duration.count() << " microseconds" << std::endl;
 
     return 0;
 }

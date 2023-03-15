@@ -4,5 +4,5 @@ venv/
 .vscode/*
 misc/old_files/
 misc/benchmark/input/*
-misc/results/histograms/*
+misc/histograms/*
 build/objects/src/*

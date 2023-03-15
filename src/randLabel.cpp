@@ -17,7 +17,7 @@ const string &RandLabel::label(){
     random_shuffle(labels, labels+256);
 
     stringstream ss;
-    // cout << "digraph fir16{\n";
+    // cout << "digraph fir{\n";
     for(auto &e:edges){
         
         int u = e.first;
@@ -46,10 +46,12 @@ const string &RandLabel::label(){
                 label_[v]=name;
             } 
         }
+
         ss << label_[u] << " " << label_[v] << "\n";
-        // cout << "\t" << u << "->" << v << " [label_=\"("<< label_[u] << ", " << label_[v] << ")\"]\n";
+        // cout << "\t" << u << "->" << v << " [label=\"("<< label_[u] << ", " << label_[v] << ")\"]\n";
     }
     // cout << "}\n";
+    // cout << "rotulos usados: " << pos << "\n";
     file = ss.str();
 
     return file;

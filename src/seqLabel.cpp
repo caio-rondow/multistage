@@ -44,9 +44,9 @@ const string &SeqLabel::label(){
         ss << label_[u] << " " << label_[v] << "\n";
         // cout << "\t" << u << "->" << v << " [label_=\"("<< label_[u] << ", " << label_[v] << ")\"]\n";
     }
+    // cout << pos << "\n";
     // cout << "}\n";
     file = ss.str();
-
-
+    
     return file;
 }

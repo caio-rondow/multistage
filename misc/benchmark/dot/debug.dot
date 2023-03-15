@@ -1,0 +1,8 @@
+digraph Debug{
+    A -> B;
+    A -> C;
+    A -> D;
+    E -> A;
+    F -> A;
+    G -> A;
+}

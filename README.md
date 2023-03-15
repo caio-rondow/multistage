@@ -241,3 +241,133 @@ feedback_points|aleatório T2|100|51|0|51
 
 
 https://excalidraw.com/#json=GTrRFjLosl7m_28-Dths1,Pa5u9hOli3ouL2DkZGeTCw
+
+
+
+
+
+
+<table>
+<tr><th></th><th></th></tr>
+<tr><td>
+
+Grafo| Roteamento | Rótulos utilizados (% deixei de usar) |Máximo de rótulos
+---|---|---|---|
+arf|100.0|210 (12.5%) |240
+conv3|100.0|189 (22.2%)|243
+feedback_points|100.0|153 (40.0%)|255
+fir|100.0|172 (20.0%)|215
+fir1|100.0|172 (20.0%)|215
+fir2|100.0|195 (16.6%)|234
+horner_bezier_surf|100.0|224 (12.5%)|256
+interpolate_aux|100.0|104 (50.0%)|208
+motion_vectors|100.0|174 (25.0%)|232
+mac|100.0|208 (15.7%)|247
+simple|100.0|210 (16.6%)|252
+
+</td><td>
+
+Grafo| Roteamento | Rótulos utilizados (% deixei de usar) |Máximo de rótulos
+---|---|---|---|
+Fir16|100.0|252 (0.0%)|252
+k4n4op|100.0|204 (0.0%)|204
+h2v2_smooth|100.0|220 (0.0%)|220
+jpeg_idct_ifast|100.0|210 (0.0%)|210
+mults1|100.0|253 (0.0%)|253
+Cplx8|100.0|240 (0.0%)|240
+cosine2|100.0|182 (0.0%)|182
+ewf|100.0|235 (0.0%)|235
+jpeg_fdct_islow|100.0|210 (0.0%)|210
+FilterRGB|100.0|210 (0.0%)|210
+cosine1|100.0|228 (0.0%)|228
+
+</td></tr> </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table>
+<tr><th></th><th></th></tr>
+<tr><td>
+
+Grafo| Roteamento | Rótulos utilizados (% deixei de usar) |Máximo de rótulos
+---|---|---|---|
+arf|100.0|60 (75.0%) |240
+conv3|100.0| 108 (55.5%)|243
+feedback_points|100.0| 102 (60.0%)|255
+fir|100.0| 172 (20.0%)|215
+fir1|100.0|129 (40.0%)|215
+fir2|100.0|156 (33.3%)|234
+horner_bezier_surf|100.0| 192 (25.0%)|256
+interpolate_aux|100.0|104 (50.0%)|208
+motion_vectors|100.0|174 (25.0%)|232
+mac|100.0| 156 (36.8%)|247
+simple|100.0| 154 (38.8%)|252
+
+</td><td>
+
+Grafo| Roteamento | Rótulos utilizados (% deixei de usar) |Máximo de rótulos
+---|---|---|---|
+Fir16|100.0| 63 (75.0%)|252
+k4n4op| 98.5294 | 68 (66.6%)|204
+h2v2_smooth| 98.1818 | 55 (75.0%)|220
+jpeg_idct_ifast| 75.2381 |210 (0.0%)|210
+mults1|100.0| 115 (54.5%)|253
+Cplx8| 86.6667 | 60 (75.0%)|240
+cosine2| 89.011 | 91 (50.0%)|182
+ewf|87.234| 47 (80.0%)|235
+jpeg_fdct_islow| 78.5714 |210 (0.0%)|210
+FilterRGB|100.0| 70 (66.6%)|210
+cosine1| 84.2105  | 76 (66.6%)|228
+
+</td></tr> </table>
+
+
+
+<table>
+<tr><th></th><th></th></tr>
+<tr><td>
+
+Grafo|	Roteamento | Rótulos utilizados (% deixei de usar) | Máximo de rótulos
+---|---|---|---|
+arf|	100.0 | 180 (25.0%)| 240
+conv3|	100.0 | 189 (22.2%)| 243
+feedback_points| 100.0 | 153 (40.0%)| 255
+fir|	100.0 | 172 (20.0%)| 215
+fir1|	100.0 | 172 (20.0%)| 215
+fir2|	100.0 | 156 (33.3%)| 234
+horner_bezier_surf|	100.0 | 192 (25.0%)| 256
+interpolate_aux|	100.0 | 104 (50.0%)| 208
+motion_vectors|	100.0 | 174 (25.0%)| 232
+mac|	100.0 | 208 (15.7%)| 247
+simple|	100.0 | 196 (22.2%)| 252
+
+
+</td><td>
+
+Grafo|	Roteamento | Rótulos utilizados (% deixei de usar) | Máximo de rótulos
+---|---|---|---|
+Fir16|	100.0 | 189 (25.0%)| 252
+k4n4op|	100.0 | 204 (0.0%)| 204
+h2v2_smooth|	100.0 | 165 (25.0%)| 220 
+jpeg_idct_ifast|	100.0 | 210 (0.0%)| 210
+mults1|	100.0 | 207 (18.1%)| 253
+Cplx8|	100.0 | 180 (25.0%)| 240
+cosine2|	100.0 | 182 (0.0%)| 182
+ewf|	100.0 | 188 (20.0%)| 2354
+jpeg_fdct_islow|	100.0 | 210 (0.0%)| 210
+FilterRGB|	100.0 | 210 (0.0%) | 210
+cosine1|	1400.0 | 152 (33.3%)| 228
+
+</td></tr> </table>

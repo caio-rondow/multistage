@@ -5,15 +5,16 @@ Label::Label(const Digraph&G, int type){
     switch(type){
         case 0: 
             strategy_ = new SeqLabel(G);
-        break;
-
+            break;
         case 2: 
             strategy_ = new SmartLabel(G);
-        break;
-        
+            break;
+        case 3:
+            strategy_ = new EmptyLabel(G);
+            break;
         default:
             strategy_ = new RandLabel(G);
-        break;
+            break;
     }
 }
 
