@@ -9,7 +9,7 @@
 > Rede Omega\
 Entrada/Saída 256x256\
 Radix4\
-'st' estágios\
+4 estágios\
 'ex' estágios extras\
 't' viagens
 
