@@ -93,12 +93,12 @@ vector<pair<int,int>> Digraph::edges() const{
 
     // /* TIRAR DEPOIS */ 
 
-    sort(edges.begin(), edges.end(), [&](pair<int,int> a, pair<int,int> b) {
-        int u = a.first;
-        int v = b.first;
+    // sort(edges.begin(), edges.end(), [&](pair<int,int> a, pair<int,int> b) {
+    //     int u = a.first;
+    //     int v = b.first;
 
-        return out_degree(u) > out_degree(v);
-    });
+    //     return out_degree(u) > out_degree(v);
+    // });
 
     // // for(auto &e:edges)
     //     // cout << e.first << " " << e.second << "\n";

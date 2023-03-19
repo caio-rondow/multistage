@@ -10,7 +10,7 @@ Label::Label(const Digraph&G, int type){
             strategy_ = new SmartLabel(G);
             break;
         case 3:
-            strategy_ = new EmptyLabel(G);
+            strategy_ = new LocalLabel(G);
             break;
         default:
             strategy_ = new RandLabel(G);

@@ -24,7 +24,6 @@ int main(int argc, char *argv[]){
     Label labeler(G, type);
     Omega net = Omega(n,st,ex);
     int num_edges=G.number_of_edges();
-
     while(rounds--){
 
         vector<pair<int,int>> fail;
@@ -33,7 +32,7 @@ int main(int argc, char *argv[]){
 
         /* label graph with strategy 'type' */
         string file = labeler.label();
-
+        
         /* first trip */
         for(int i=0; i<num_edges; i++){
             int u,v;

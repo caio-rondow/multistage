@@ -1,7 +1,155 @@
 # Redes Multiestágio
 
-
 ## Como executar?
+
+> ./route.sh <nome_do_grafo> ou ./route.sh all
+
+## Informações da rede
+
+> Rede Omega\
+Entrada/Saída 256x256\
+Radix4\
+'st' estágios\
+'ex' estágios extras\
+'t' viagens
+
+## Experimentos
+
+### Rotulação
+
+> Foram escolhidas 4 estratégias de rotulação dos grafos, sendo que a busca no grafo foi por largura da saida para entrada. São elas:
+
+* Sequencial
+* Aleatória
+* Multicast com destino semelhante
+* Sequencial com busca por rótulos vazios
+
+### Roteamento
+
+> Para o roteamento, usamos uma rede com 4 estágios, 1 estágio extra com 2 viagens e outra rede com 4 estágios, 4 estágios extras e 1 viagem.
+
+> O algorítmo de roteamento pode ser visto na seção 4.2 em [REDE OMEGA VIRTUAL EM FPGA COM RECONFIGURAÇÃO EM TEMPO DE
+EXECUÇÃO. ESTUDO DE CASO: CÁLCULO DE ATRATORES EM REDES
+REGULADORAS DE GENES.](https://www.locus.ufv.br/bitstream/123456789/2634/1/texto%20completo.pdf)
+
+### Benchmarks
+
+> Na tabela abaixo, estão listados os benchmarks utilizados neste projeto e algumas métricas importantes.
+
+|Grafo             |V/A    |grau máximo|grau médio|cabem na rede(máximo de arestas) |
+|------------------|-------|-----------|----------|---------------------------------|
+|k4n4op            |55/68  |4          |2.47      |3(204)                           |
+|fir2              |40/39  |3          |1.95      |4(156)                           |
+|interpolate_aux   |108/104|3          |1.93      |1(104)                           |
+|Fir16             |49/63  |3          |2.57      |4(252)                           |
+|horner_bezier_surf|17/16  |3          |1.88      |12(192)                          |
+|h2v2_smooth       |52/55  |4          |2.12      |3(165)                           |
+|jpeg_idct_ifast   |167/210|4          |2.51      |1(210)                           |
+|mults1            |20/23  |4          |2.30      |9(207)                           |
+|Cplx8             |46/60  |3          |2.61      |4(240)                           |
+|cosine2           |81/91  |5          |2.25      |2(182)                           |
+|ewf               |34/47  |5          |2.76      |5(235)                           |
+|simple            |12/14  |6          |2.33      |14(196)                          |
+|feedback_points   |54/51  |3          |1.89      |3(153)                           |
+|motion_vectors    |32/29  |3          |1.81      |5(145)                           |
+|arf               |28/30  |4          |2.14      |6(180)                           |
+|conv3             |24/27  |7          |2.25      |7(189)                           |
+|jpeg_fdct_islow   |173/210|4          |2.43      |1(210)                           |
+|fir               |44/43  |3          |1.95      |3(129)                           |
+|mac               |11/13  |5          |2.36      |16(208)                          |
+|FilterRGB         |57/70  |4          |2.46      |3(210)                           |
+|fir1              |44/43  |3          |1.95      |3(129)                           |
+|cosine1           |66/76  |4          |2.30      |2(152)                           |
+
+## Resultados
+
+* Rede Com 4 estágios extras e 1 viagem
+
+> Considere a tabela abaixo que apresenta o resultado dos roteamentos(%) obtidos com os algoritmos de rotulação **sequencial**, **sequencial com busca por rótulos vazios** e **aleatório**.
+
+> Note que, nem todos os grafos aparecem na tabela abaixo. Esses foram resolvidos com a rotulação **sequencial**, isto é, atigiram o roteamento de 100%.
+
+<div class="row"><div class="col-md-12"><div class="panel panel-success"><div class="panel-heading "><h3 class="panel-title"></h3></div>
+
+<table border=1 class="table table-striped table-bordered table-hover table-condensed" style="margin: 0 auto;">
+
+<thead><tr><th title="Field #1">Grafo</th>
+<th title="Field #2">Sequencial</th>
+<th title="Field #3">SequencialComVazio</th>
+<th title="Field #4">Aleatório(1000x)</th>
+</tr></thead>
+<tbody><tr><td>Cplx8</td>
+<td align="center">99.1667</td>
+<td align="center">100</td>
+<td align="center">96.25</td>
+</tr>
+<tr><td>conv3</td>
+<td align="center">99.4709</td>
+<td align="center">99.4709</td>
+<td align="center">100</td>
+</tr>
+<tr><td>feedback_points</td>
+<td align="center">99.3464</td>
+<td align="center">100</td>
+<td align="center">100</td>
+</tr>
+<tr><td>fir2</td>
+<td align="center">98.7179</td>
+<td align="center">100</td>
+<td align="center">100</td>
+</tr>
+<tr><td>h2v2_smooth</td>
+<td align="center">99.3939</td>
+<td align="center">100</td>
+<td align="center">100</td>
+</tr>
+<tr><td>horner_bezier_surf</td>
+<td align="center">96.8750</td>
+<td align="center">100</td>
+<td align="center">100</td>
+</tr>
+<tr><td>jpeg_fdct_islow</td>
+<td align="center">99.0476</td>
+<td align="center">100</td>
+<td align="center">100</td>
+</tr>
+<tr><td>k4n4op</td>
+<td align="center">99.5098</td>
+<td align="center">100</td>
+<td align="center">100</td>
+</tr>
+<tr><td>motion_vectors</td>
+<td align="center">99.3103</td>
+<td align="center">100</td>
+<td align="center">100</td>
+</tr>
+<tr><td>mults1</td>
+<td align="center">99.5169</td>
+<td align="center">100</td>
+<td align="center">100</td>
+</tr>
+</tbody></table>
+</div></div></div>
+
+<br><br>
+
+* Rede Com 1 estágio extra e 2 viagem
+
+> Com as segunda viagem, a rede ja é capaz de resolver com a estratégia sequencial.
+
+![Roteamento 1 estágio extra 2 viagens](misc/route1ex2t.png)
+
+
+## Conclusões
+
+> Com os resultados obtidos, podemos concluir que, de fato, é possivel conectar várias cópias de um grafo, ao mesmo tempo e conseguir realizar o roteamento em uma rede bloqueante omega.
+
+> Entretanto, mostramos apenas que é possivel na teoria. Na pratica, os recursos são limitados e usar 4 estágios extras ou realizar 2 viagens pode ser inviável. Assim, convém otimizar tanto as estratégias de rotulação, quanto as de roteamento, tendo em vista os padrões encontrados nestes experimentos.
+
+> Nos proximos passos iremos tentar nos aproximar dos resultados obtidos aqui, mas com os parâmetros da rede próximos da realidade.
+
+
+<!-- ## Como executar?
 
 > ./route.sh <grafo\> 
 
@@ -41,7 +189,7 @@ Como a lista de arestas foi gerada: profundidade, na direção da saida para ent
     - Teste 1: [Roteamento padrão i -> i](./misc/results/route_pattern_test1.txt)
     - Teste 2: [Roteamento padrão i -> i+n](./misc/results/route_pattern_test2.txt)
 
-* Histograma roteando 100.000x aleatório 1 grafo (Fir16):
+* Histograma roteando 1000x aleatório 1 grafo (Fir16):
 
 <p align="center">
     <img src="./misc/results/histograms/100000_rand.png" width="400" height="300"/>
@@ -111,7 +259,7 @@ cosine1|16|24|26|0|76
     > Roteou 96.8254% - 1 grafo(s) - T2 sequencial - 1 estágios extras.\
     > Roteou 100%     - 1 grafo(s) - T2 aleatório  - 1 estágios extras.
 
-* Histograma roteando 100.000x aleatório 1 grafo (Fir16):
+* Histograma roteando 1000x aleatório 1 grafo (Fir16):
 
 <p align="center">
     <img src="./misc/results/histograms/100000_rand_2_inputs.png" width="400" height="300"/>
@@ -370,4 +518,4 @@ jpeg_fdct_islow|	100.0 | 210 (0.0%)| 210
 FilterRGB|	100.0 | 210 (0.0%) | 210
 cosine1|	1400.0 | 152 (33.3%)| 228
 
-</td></tr> </table>
+</td></tr> </table> -->

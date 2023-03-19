@@ -3,9 +3,9 @@ declare -i COUNT=0
 declare -i N=256
 declare -i ST=4
 #   IMPORTANT ONES...  #
-declare -i TYPE=0      # 0 sequential, 1 random, 2 smart random, 3 check for no used labels
+declare -i TYPE=3      # 0 sequential, 1 random, 2 smart random
 declare -i EX=4        # extra stages
-# declare -i IN_NET=7    # number of graphs in net
+# declare -i IN_NET=12    # number of graphs in net
 declare -i ROUNDS=1    # how much iterations
 declare -i TWOTRIPS=0  # 0 two trips off, 1 two trips on
 # ==================== #

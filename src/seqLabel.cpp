@@ -1,4 +1,5 @@
 #include "../include/seqLabel.h"
+#include "../include/omega.h"
 
 SeqLabel::SeqLabel(const Digraph&G):LabelStrategy(G){}
 
@@ -6,7 +7,7 @@ const string &SeqLabel::label(){
     // code sequential strat. here...
     int labels[256];            // rotulos disponiveis
     int pos=0;                  // cursor do rotulo
-
+    
     // Init arrays
     for(int i=0; i<nv; i++)
         visited_[i]=-1;
@@ -14,9 +15,8 @@ const string &SeqLabel::label(){
         labels[i]=i;
 
     stringstream ss;
-    // cout << "digraph fir16{\n";
     for(auto &e:edges){
-        
+
         int u = e.first;
         int v = e.second;
         int name;
@@ -42,10 +42,9 @@ const string &SeqLabel::label(){
             } 
         }
         ss << label_[u] << " " << label_[v] << "\n";
-        // cout << "\t" << u << "->" << v << " [label_=\"("<< label_[u] << ", " << label_[v] << ")\"]\n";
     }
-    // cout << pos << "\n";
-    // cout << "}\n";
+
+
     file = ss.str();
     
     return file;

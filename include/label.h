@@ -4,6 +4,7 @@
 #include "randLabel.h"
 #include "smartLabel.h"
 #include "seqLabel.h"
+#include "localLabel.h"
 
 using namespace std;
 
