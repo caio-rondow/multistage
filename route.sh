@@ -3,9 +3,9 @@ declare -i COUNT=0
 declare -i N=256
 declare -i ST=4
 #   IMPORTANT ONES...  #
-declare -i TYPE=3      # 0 sequential, 1 random, 2 smart random
-declare -i EX=4        # extra stages
-# declare -i IN_NET=12    # number of graphs in net
+declare -i TYPE=0      # 0 sequential, 1 random, 2 smart random
+declare -i EX=1        # extra stages
+declare -i IN_NET=1    # number of graphs in net
 declare -i ROUNDS=1    # how much iterations
 declare -i TWOTRIPS=0  # 0 two trips off, 1 two trips on
 # ==================== #
@@ -47,56 +47,56 @@ else
     exit 1
 fi
 
-# # max graphs in net
-MAX_IN_NET=(
-    4	# Cplx8.dot
-    3	# FilterRGB.dot
-    4	# Fir16.dot
-    6	# arf.dot 
-    7	# conv3.dot 
-    2	# cosine1.dot
-    2	# cosine2.dot
-    5	# ewf.dot
-    3	# feedback_points.dot 
-    3	# fir.dot 
-    3	# fir1.dot 
-    4	# fir2.dot 
-    3	# h2v2_smooth.dot 
-    12	# horner_bezier_surf.dot 
-    1	# interpolate_aux.dot 
-    1	# jpeg_fdct_islow.dot
-    1	# jpeg_idct_ifast.dot
-    3	# k4n4op.dot
-    16	# mac.dot 
-    5	# motion_vectors.dot 
-    9	# mults1.dot 
-    14	# simple.dot 
-)
-
-# remaining_labels=(
-#     244
-#     216
-#     256
-#     228
-#     252
-#     184
-#     244
-#     245
-#     216
-#     195
-#     195
-#     220
-#     213
-#     240
-#     152
-#     234
-#     234
-#     216
-#     256
-#     215
-#     216
-#     252
+# # # max graphs in net
+# MAX_IN_NET=(
+#     4	# Cplx8.dot
+#     3	# FilterRGB.dot
+#     4	# Fir16.dot
+#     6	# arf.dot 
+#     7	# conv3.dot 
+#     2	# cosine1.dot
+#     2	# cosine2.dot
+#     5	# ewf.dot
+#     3	# feedback_points.dot 
+#     3	# fir.dot 
+#     3	# fir1.dot 
+#     4	# fir2.dot 
+#     3	# h2v2_smooth.dot 
+#     12	# horner_bezier_surf.dot 
+#     1	# interpolate_aux.dot 
+#     1	# jpeg_fdct_islow.dot
+#     1	# jpeg_idct_ifast.dot
+#     3	# k4n4op.dot
+#     16	# mac.dot 
+#     5	# motion_vectors.dot 
+#     9	# mults1.dot 
+#     14	# simple.dot 
 # )
+
+MAX_IN_NET=(
+    2 # Cplx8
+    2 # FilterRGB
+    2 # Fir16
+    4 # arf
+    5 # conv3
+    1 # cosine1
+    1 # cosine2
+    3 # ewf
+    2 # feedback_points
+    2 # fir
+    2 # fir1
+    3 # fir2
+    2 # h2v2_smooth
+    7 # horner_bezier_surf
+    1 # interpolate_aux
+    1 # jpeg_fdct_islow
+    1 # jpeg_idct_ifast
+    2 # k4n4op
+    11 # mac
+    4 # motion_vectors
+    6 # mults1
+    10 # simple
+)
 
 # run make
 command make -s
@@ -114,11 +114,15 @@ fi
 echo -e "num. trips\t$(($TWOTRIPS+1))\n"
 
 # RUN CODE HERE
+# echo "graph,nodes,route" > misc/result_1e1t.csv
 for ((i=0; i < ${#GRAPH[@]}; i++)) do
     # echo "${GRAPH[i]} ok"
-    ./build/apps/program ${GRAPH[i]} $N $ST $EX $TWOTRIPS ${MAX_IN_NET[i]} $ROUNDS $TYPE > misc/values.txt
-    command python3 src/histogram.py misc/values.txt $EX $ROUNDS ${MAX_IN_NET[i]} ${GRAPH[i]}
+    ./build/apps/program ${GRAPH[i]} $N $ST $EX $TWOTRIPS ${MAX_IN_NET[i]} $ROUNDS $TYPE >> misc/values.txt
+    # command python3 src/histogram.py misc/values.txt $EX $ROUNDS ${MAX_IN_NET[i]} ${GRAPH[i]}
     
+    # ./build/apps/program ${GRAPH[i]} $N $ST $EX $TWOTRIPS $IN_NET $ROUNDS $TYPE >> misc/values.txt
+
+
     # ./build/apps/program ${GRAPH[i]} $N $ST $EX $TWOTRIPS $IN_NET $ROUNDS $TYPE > misc/values.txt
     # command python3 src/histogram.py misc/values.txt $EX $ROUNDS IN_NET ${GRAPH[i]}
 
