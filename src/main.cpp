@@ -24,40 +24,46 @@ int main(int argc, char *argv[]){
     Label labeler(G, type);
     Omega net = Omega(n,st,ex);
     int num_edges=G.number_of_edges();
-    while(rounds--){
 
-        vector<pair<int,int>> fail;
-        stringstream ss;
-        int count=0;
+    
 
-        /* label graph with strategy 'type' */
-        string file = labeler.label();
+
+
+
+    // while(rounds--){
+
+    //     vector<pair<int,int>> fail;
+    //     stringstream ss;
+    //     int count=0;
+
+    //     /* label graph with strategy 'type' */
+    //     string file = labeler.label();
         
-        /* first trip */
-        for(int i=0; i<num_edges; i++){
-            int u,v;
-            ss << file;
-            ss >> u >> v;
-            bool ans = net.route(u,v);
-            if(!ans){
-                fail.push_back(make_pair(u,v));
-            }
-            count+=ans;
-        }
+    //     /* first trip */
+    //     for(int i=0; i<num_edges; i++){
+    //         int u,v;
+    //         ss << file;
+    //         ss >> u >> v;
+    //         bool ans = net.route(u,v);
+    //         if(!ans){
+    //             fail.push_back(make_pair(u,v));
+    //         }
+    //         count+=ans;
+    //     }
 
-        /* second trip */
-        if(second_trip){
-            net.clear();
-            for(auto &e:fail)
-                count += net.route(e.first, e.second);
-        }
+    //     /* second trip */
+    //     if(second_trip){
+    //         net.clear();
+    //         for(auto &e:fail)
+    //             count += net.route(e.first, e.second);
+    //     }
         
-        /* % routed */
-        float result = (count*100.0)/num_edges;
-        cout << result << "\n";
-        if(result == 100.0) return 0;
-        net.clear();
-    }
+    //     /* % routed */
+    //     float result = (count*100.0)/num_edges;
+    //     cout << result << "\n";
+    //     if(result == 100.0) return 0;
+    //     net.clear();
+    // }
 
     return 0;
 }
