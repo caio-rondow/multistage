@@ -9,7 +9,7 @@
 > Rede Omega\
 Entrada/Saída 256x256\
 Radix4\
-'st' estágios\
+4 estágios\
 'ex' estágios extras\
 't' viagens
 
@@ -23,6 +23,9 @@ Radix4\
 * Aleatória
 * Multicast com destino semelhante
 * Sequencial com busca por rótulos vazios
+
+[Exemplo de rotulação sequencial com busca por rótulos vazios](https://excalidraw.com/#json=mcoQI6aNquSjQq9sIgKTw,aCxus7q9PlLyHClMDEQ2kQ
+)
 
 ### Roteamento
 
@@ -139,7 +142,6 @@ REGULADORAS DE GENES.](https://www.locus.ufv.br/bitstream/123456789/2634/1/texto
 
 ![Roteamento 1 estágio extra 2 viagens](misc/route1ex2t.png)
 
-
 ## Conclusões
 
 > Com os resultados obtidos, podemos concluir que, de fato, é possivel conectar várias cópias de um grafo, ao mesmo tempo e conseguir realizar o roteamento em uma rede bloqueante omega.
@@ -147,6 +149,20 @@ REGULADORAS DE GENES.](https://www.locus.ufv.br/bitstream/123456789/2634/1/texto
 > Entretanto, mostramos apenas que é possivel na teoria. Na pratica, os recursos são limitados e usar 4 estágios extras ou realizar 2 viagens pode ser inviável. Assim, convém otimizar tanto as estratégias de rotulação, quanto as de roteamento, tendo em vista os padrões encontrados nestes experimentos.
 
 > Nos proximos passos iremos tentar nos aproximar dos resultados obtidos aqui, mas com os parâmetros da rede próximos da realidade.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <!-- ## Como executar?
