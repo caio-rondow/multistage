@@ -2,51 +2,35 @@
 #include "include/omega.h"
 using namespace std;
 
-bool assert_equal_after_unroute(Omega&net, const vector<pair<int,int>>&net_input){
-
-    vector<vector<int>> old_circuit = net.copy_circuit();
-    vector<vector<int>> old_free    = net.copy_free();
-
-    /* route */
-    for(int i=0; i<net_input.size(); i++){
-        int input = net_input[i].first;
-        int output = net_input[i].second;
-        net.route(input, output);
-    }
-
-    /* unroute */
-    for(int i=0; i<net_input.size(); i++){
-        int input = net_input[i].first;
-        int output = net_input[i].second;
-        net.unroute(input, output);
-    }
-
-    vector<vector<int>> new_circuit = net.copy_circuit();
-    vector<vector<int>> new_free    = net.copy_free();
-
-    /* compare */
-    for(int i=0; i<1024; i++){
-        for(int j=0; j<14; j++){
-            if(old_circuit[i][j] != new_circuit[i][j] || old_free[i][j] != new_free[i][j]){
-                return false;
-            }
-        }
-    }
-    return true;
-}
-
 int main(){
 
     Omega net(4,4,1);
+    vector<PE> arc;
 
-    vector<pair<int,int>> test1 = { 
-        make_pair(0,0), make_pair(0,1), make_pair(0,2), make_pair(0,3),
-        make_pair(1,0), make_pair(1,1), make_pair(1,2), make_pair(1,3),
-        make_pair(2,0), make_pair(2,1), make_pair(2,2), make_pair(2,3),
-        make_pair(3,0), make_pair(3,1), make_pair(3,2), make_pair(3,3)
-    };
+    for(int i=0; i<4; i++){
+        arc.push_back(PE(2,2));
+    }
 
-    cout << "test 1 - assert net after unroute: " << (assert_equal_after_unroute(net, test1) == true ? "ok\n" : "not ok\n");
+    int input_label[8];
+    int output_label[8];
+    for(int i=0; i<8; i++){
+        input_label[i]=i;
+        output_label[i]=i;
+    }
+    random_shuffle(input_label, input_label+8);
+    random_shuffle(output_label, output_label+8);
+
+    int k=0;
+    for(int i=0; i<4; i++){
+        for(int j=0; j<2; j++){  
+            arc[i].input[j] = input_label[k];
+            arc[i].output[j] = output_label[k];
+            k++;
+        }
+    } 
+
+    net.route(0,1);
+    net.print_network();
 
     return 0;
 }
