@@ -58,6 +58,7 @@ bool Omega::route(int input, int output){
             } //cout << "\n";
             // cout << word << "\n";
             /* marca na tabela qual caminho eu fiz para input/output */
+            cout << "input x output: " << input << " x " << output << " -> word " << word << "\n";
             inword[input].push_back(word);
             outword[output]=word;
 
@@ -69,6 +70,9 @@ bool Omega::route(int input, int output){
 }
 
 void Omega::unroute(int word){
+
+    if(word == -1)
+        return;
 
     for(int j=0; j<st+ex; j++){
         int i = (word >> (2*(st+ex) - 2*(j+1))) & mask;
@@ -88,20 +92,27 @@ void Omega::dealloc(PE elem){
     int n = elem.n;
     int m = elem.m;
 
+    cout << "input:\n";
     for(int i=0; i<n; i++){
-        int in = input[i];
+        
+        int in = output[i];
         int size = inword[in].size();
+
         for(int j=0; j<size; j++){
             int word = inword[in][j];
+
+            cout << in << " " << word << "\n";
             unroute(word);
-            // delete word from inword
-            inword[in].erase(inword[i].begin()+j);
         }
+
+        inword[in].erase(inword[in].begin(), inword[in].end());
     }
 
+    cout << "output:\n";
     for(int i=0; i<m; i++){
-        int word = outword[output[i]];
+        int word = outword[input[i]];
         unroute(word);
+        cout << input[i] << " " << word << "\n";
         output[i]=-1;
     }
 
